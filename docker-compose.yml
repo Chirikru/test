@@ -19,6 +19,19 @@ services:
     ports:
       - 9090:9090
     restart: always
+  
+  alertmanager:
+    build: ./alertmanager 
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/:/etc/alertmanager/
+    restart: always
+    command:
+      - '-config.file=/etc/alertmanager/config.yml'
+      - '-storage.path=/alertmanager'
+    deploy:
+      mode: global
 
   grafana:
     image: grafana/grafana
