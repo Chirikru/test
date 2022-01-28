@@ -33,7 +33,6 @@ grafana:
       - grafana_data:/var/lib/grafana
     env_file:
       - config.monitoring
-
   blackbox_exporter:
     build: ./blackboxexporter    
     ports:
