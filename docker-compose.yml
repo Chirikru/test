@@ -23,7 +23,6 @@ services:
     restart: always
     deploy:
       mode: global
-      
 grafana:
     image: grafana/grafana:5.4.2
     depends_on:
