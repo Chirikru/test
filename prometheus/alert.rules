@@ -1,0 +1,12 @@
+groups:
+- name: AlertBOT
+  rules:
+
+  - alert: Код ошибки 5ХХ
+    expr: probe_http_status_code >= 500
+    for: 0m
+    labels:
+      severity: critical
+    annotations:
+      summary: site_down (instance {{ $labels.instance }})
+      description: "Код ошибки 5ХХ\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
