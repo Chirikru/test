@@ -1,4 +1,4 @@
-version: '0.1'
+version: '0.2'
 
 volumes:
     prometheus_data: {}
@@ -7,8 +7,9 @@ volumes:
 services:
 
   prometheus:
-    build: ./prometheus
+    image: prom/prometheus:v2.0.0
     volumes:
+      - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -18,10 +19,14 @@ services:
       - '--web.enable-lifecycle'
     ports:
       - 9090:9090
+    links:
+      - alertmanager:alertmanager
     restart: always
+    deploy:
+      mode: global
   
   alertmanager:
-    build: ./alertmanager 
+    image: prom/alertmanager
     ports:
       - 9093:9093
     volumes:
@@ -46,9 +51,11 @@ services:
       - config.monitoring
 
   blackbox_exporter:
-    build: ./blackboxexporter
+    image: prom/blackbox-exporter
     ports:
       - 9115:9115
+     volumes:
+      - ./blackboxexporter/:/etc/blackboxexporter/  
     command:
       - '--config.file=/etc/blackboxexporter/config.yml'
     restart: always
