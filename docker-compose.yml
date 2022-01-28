@@ -7,9 +7,8 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.0.0
+    build: ./prometheus
     volumes:
-      - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
@@ -19,44 +18,23 @@ services:
       - '--web.enable-lifecycle'
     ports:
       - 9090:9090
-    links:
-      - alertmanager:alertmanager
     restart: always
-    deploy:
-      mode: global
-
-  alertmanager:
-    image: prom/alertmanager:v0.12.0
-    ports:
-      - 9093:9093
-    volumes:
-      - ./alertmanager/:/etc/alertmanager/
-    restart: always
-    command:
-      - '-config.file=/etc/alertmanager/config.yml'
-      - '-storage.path=/alertmanager'
-    deploy:
-      mode: global
 
   grafana:
-    image: grafana/grafana:5.4.2
+    image: grafana/grafana
     depends_on:
       - prometheus
     ports:
       - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./grafana/dashboards:/var/lib/grafana/dashboards
-      - ./grafana/provisioning:/etc/grafana/provisioning
     env_file:
       - config.monitoring
 
   blackbox_exporter:
-    image: prom/blackbox-exporter:v0.10.0
+    build: ./blackboxexporter
     ports:
       - 9115:9115
-    volumes:
-      - ./blackboxexporter/:/etc/blackboxexporter/
     command:
       - '--config.file=/etc/blackboxexporter/config.yml'
     restart: always
