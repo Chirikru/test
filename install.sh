@@ -22,7 +22,7 @@ if ! type "git" > /dev/null; then
   apt-get -y install git
 fi
 
-DIRECTORY="prometheus-grafana-alertmanager-example"
+DIRECTORY="test"
 if [ -d "$DIRECTORY" ]; then
   rm -rf "$DIRECTORY"
 fi
