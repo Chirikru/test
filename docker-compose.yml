@@ -25,16 +25,20 @@ services:
     deploy:
       mode: global
       
+
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:v0.12.0
     ports:
-        - 9093:9093
+      - 9093:9093
     volumes:
-          - ./alertmanager/:/etc/alertmanager/
+      - ./alertmanager/:/etc/alertmanager/
     restart: always
     command:
-        - --config.file=/etc/alertmanager/config.yml
-        - --storage.path=/alertmanager
+      - '-config.file=/etc/alertmanager/config.yml'
+      - '-storage.path=/alertmanager'
+    deploy:
+      mode: global
+      
   grafana:
     image: grafana/grafana:5.4.2
     depends_on:
