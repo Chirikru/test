@@ -60,3 +60,9 @@ services:
     command:
       - '--config.file=/etc/blackboxexporter/config.yml'
     restart: always
+  
+  bot_telegram:
+    build: python ./alert.py
+    ports:
+      - 9060:9060
+    restart: always
