@@ -40,13 +40,9 @@ echo "Waiting 5 seconds for services to come up"
 sleep 5
 cd "~"
 
-DIRECTORY="django-blog"
-if [ -d "$DIRECTOR" ]; then
-  rm -rf "$DIRECTOR"
-fi
 echo "Cloning Project"
 git clone https://github.com/reljicd/django-blog.git
-cd "$DIRECTOR"
+cd "django-blog/"
 
 echo "Making Utility scripts executable"
 chmod +x ./scripts/*.sh
