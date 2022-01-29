@@ -38,7 +38,7 @@ docker stack deploy -c docker-compose.yml prom
 
 echo "Waiting 5 seconds for services to come up"
 sleep 5
-cd ..
+cd ".."
 
 DIRECTORY="django-blog"
 if [ -d "$DIRECTOR" ]; then
