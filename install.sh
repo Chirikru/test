@@ -39,10 +39,8 @@ docker stack deploy -c docker-compose.yml prom
 echo "Waiting 5 seconds for services to come up"
 sleep 5
 
-if docker service ls | grep "0/1";  do sleep 3; echo "Waiting...";
 
 #echo "You can now access your Grafana dashboard at http://$ADDRESS:3000"
-fi
 
 DIRECTORY="django-blog"
 if [ -d "$DIRECTORY" ]; then
@@ -54,4 +52,5 @@ cd "$DIRECTORY"
 
 echo "Making Utility scripts executable"
 chmod +x ./scripts/*.sh
+
 done;
