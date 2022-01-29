@@ -1,11 +1,9 @@
-global:
-  resolve_timeout: 1m
-
 route:
     receiver: 'telegram-webhook'
 
 receivers:
     - name: 'telegram-webhook'
       webhook_configs:
-      - url: https://api.telegram.org/bot5209561422:AAEEPNrU6AgO2IxBTykaehhonAQ4E6M37NY/sendmessage?chat_id=539686084&text=%22Alerts500X%22
-      send_resolved: true
+      - send_resolved: true
+      url: https://api.telegram.org/bot5209561422:AAEEPNrU6AgO2IxBTykaehhonAQ4E6M37NY/sendmessage?chat_id=539686084&text=%22Alerts500X%22
+      
