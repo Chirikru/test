@@ -39,6 +39,19 @@ docker stack deploy -c docker-compose.yml prom
 echo "Waiting 5 seconds for services to come up"
 sleep 5
 
-while docker service ls | grep "0/1";  do sleep 3; echo "Waiting..."; done;
+if docker service ls | grep "0/1";  do sleep 3; echo "Waiting...";
 
-echo "You can now access your Grafana dashboard at http://$ADDRESS:3000"
+#echo "You can now access your Grafana dashboard at http://$ADDRESS:3000"
+fi
+
+DIRECTORY="django-blog"
+if [ -d "$DIRECTORY" ]; then
+  rm -rf "$DIRECTORY"
+fi
+echo "Cloning Project"
+git clone https://github.com/reljicd/django-blog.git
+cd "$DIRECTORY"
+
+echo "Making Utility scripts executable"
+chmod +x ./scripts/*.sh
+done;
